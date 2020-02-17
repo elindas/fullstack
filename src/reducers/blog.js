@@ -1,12 +1,16 @@
-import { SET_USER } from "../actions";
+import { SET_BLOG } from "../actions";
 
-const initialState = [];
+const initialState = {
+    data: []
+};
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case SET_USER:
-            return action.payload;
+        case SET_BLOG:
+            return {
+                data: action.payload
+            };
         default:
-            return state;
+            return state || [];
     }
 };

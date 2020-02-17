@@ -19,7 +19,7 @@ function App() {
                 <Route exact path="/signup">
                     <SignUp />
                 </Route>
-                <Route exact path="/users">
+                <Route exact path="/blog">
                     <FormBlog />
                      <Blog />
                      

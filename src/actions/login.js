@@ -25,6 +25,7 @@ export const setLogin = data => {
 };
 
 export const login = (values, history) => dispatch => {
+
     return axios({
         method: "POST",
         url: "http://localhost:3009/users/login",
@@ -32,9 +33,10 @@ export const login = (values, history) => dispatch => {
     }).then(response => {
         if (response.status === 200) {
             localStorage.setItem("token", response.data.token)
-
+            localStorage.setItem("email", values.email)
+            
             dispatch(isLogin());
-            history.push("/users");
+            history.push("/blog");
         }
     });
 };
