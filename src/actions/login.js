@@ -24,6 +24,7 @@ export const setLogin = data => {
     };
 };
 
+
 export const login = (values, history) => dispatch => {
 
     return axios({
@@ -32,8 +33,10 @@ export const login = (values, history) => dispatch => {
         data: values
     }).then(response => {
         if (response.status === 200) {
+            console.log('token',response.data.token)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
             localStorage.setItem("token", response.data.token)
-            localStorage.setItem("email", values.email)
+            // localStorage.setItem("email", values.email)
+            
             
             dispatch(isLogin());
             history.push("/blog");

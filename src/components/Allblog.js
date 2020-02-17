@@ -51,7 +51,7 @@ class Allblog extends Component {
                                 justify="flex-end"
                                 alignItems="flex-end"
                                 >
-                                    <Link to={`/${value._id}`}><Button variant="outlined" color="primary">Read More</Button></Link>
+                                    <Link to={`blog/${value._id}`}><Button variant="outlined" color="primary">Read More</Button></Link>
                                 
                                 </Grid>
                             </Paper>

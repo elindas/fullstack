@@ -1,4 +1,5 @@
 import axios from "axios";
+import jwt from "jsonwebtoken"
 
 export const SET_BLOG = "SET_BLOG";
 
@@ -9,16 +10,21 @@ export const setBlog = data => {
     };
 };
 
+
 export const fetchBlog = () => (dispatch, getState) => {
     const { users } = getState();
 
     if (users.isLogin === true) {
         const token = localStorage.getItem("token");
-        const email = localStorage.getItem("email");
+        // const email = localStorage.getItem("email");
+        let decoded=jwt.verify(token, 'SECRET', function(err, decoded) {
+            // console.log("this is tokennnn", decoded)
+            return decoded
+          });
 
         return axios({
             method: "GET",
-            url: `http://localhost:3009/users/${email}`,
+            url: `http://localhost:3009/users/${decoded.email}`,
             headers: { authorization: `Bearer ${token}` }
         }).then(response => {
             dispatch(setBlog(response.data.data));
@@ -26,4 +32,17 @@ export const fetchBlog = () => (dispatch, getState) => {
             console.log(error);
         });
     }
+};
+
+export const deleteBlog = (id, history) => dispatch =>{
+    return axios({
+        method: "DELETE",
+        url: `http://localhost:3009/todos/${id}`,
+
+    }).then(response => {
+        console.log(response.data);
+        history.push("/blog")
+    }).catch(error => {
+        console.log(error);
+    });
 };

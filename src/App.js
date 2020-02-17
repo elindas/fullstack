@@ -20,9 +20,10 @@ function App() {
                     <SignUp />
                 </Route>
                 <Route exact path="/blog">
+                    <Blog />
+                </Route>
+                <Route exact path="/createblog">
                     <FormBlog />
-                     <Blog />
-                     
                 </Route>
             </Switch>
         </Router>
