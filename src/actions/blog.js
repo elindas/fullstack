@@ -34,14 +34,16 @@ export const fetchBlog = () => (dispatch, getState) => {
     }
 };
 
-export const deleteBlog = (id, history) => dispatch =>{
+export const deleteBlog = (id) => dispatch =>{
+    console.log('ID DI REDUX',id)
+    const token = localStorage.getItem("token");
     return axios({
         method: "DELETE",
         url: `http://localhost:3009/todos/${id}`,
-
+        headers: { authorization: `Bearer ${token}` }
     }).then(response => {
         console.log(response.data);
-        history.push("/blog")
+        dispatch(setBlog(response.data.data));
     }).catch(error => {
         console.log(error);
     });

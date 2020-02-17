@@ -6,7 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
 import { Link } from "react-router-dom";
-import { fetchBlog } from "../actions";
+import { fetchBlog, deleteBlog } from "../actions";
 
 const styles = theme => ({
     root: {
@@ -56,15 +56,18 @@ class Blog extends Component {
                                                         Update
                                                     </Button>
                                                 </Link>
-                                                <Link to={`blog/${item._id}`}>
-                                                    <Button
-                                                        spacing={3}
-                                                        variant="outlined"
-                                                        color="danger"
-                                                    >
-                                                        Delete
-                                                    </Button>
-                                                </Link>
+
+                                                <Button
+                                                    spacing={3}
+                                                    variant="outlined"
+                                                    color="danger"
+                                                    onClick={(id) =>
+                                            this.props.deleteBlog(item._id)
+                                            
+                                        }
+                                                >
+                                                    Delete
+                                                </Button>
                                             </Grid>
                                         </Paper>
                                     </Grid>
@@ -86,7 +89,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchBlog: () => dispatch(fetchBlog())
+        fetchBlog: () => dispatch(fetchBlog()),
+        deleteBlog: (id) => dispatch(deleteBlog(id))
+
     };
 };
 
