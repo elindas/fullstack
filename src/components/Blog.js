@@ -33,14 +33,14 @@ class Blog extends Component {
         return (
             <div className={classes.root}>
                 <Grid container spacing={3}>
-                    {this.props.data !== undefined && this.props.data.map((item, index) => {
+                    {this.props.data !== undefined && this.props.data[0].blog.map((item, index) => {
                        return (
                         <Fragment key={index}>
                         <Grid item xs={3}></Grid>
                         <Grid item xs={6}>
                             <Paper className={classes.paper}>
-                                <h1>{item.firstName}</h1>
-                                <p>{item.password}</p>
+                                <h1>{item.title}</h1>
+                                <p>{item.message}</p>
                                 
                                 
                                 <Grid

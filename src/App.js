@@ -4,7 +4,7 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import Blog from "./components/Blog"
 import Allblog from "./components/Allblog"
-// import Todos from "./components/Todos";
+import FormBlog from "./components/FormBlog"
 
 function App() {
     return (
@@ -20,8 +20,9 @@ function App() {
                     <SignUp />
                 </Route>
                 <Route exact path="/users">
-                    {/* <Todos /> */}
+                    <FormBlog />
                      <Blog />
+                     
                 </Route>
             </Switch>
         </Router>

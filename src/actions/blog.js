@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const SET_USER = "SET_USER";
 
+
 export const setUser = payload => {
     return {
         type: SET_USER,
@@ -17,7 +18,7 @@ export const fetchUser = () => (dispatch, getState) => {
 
         return axios({
             method: "GET",
-            url: "http://localhost:3007/users",
+            url: "http://localhost:3009/users",
             headers: { authorization: `Bearer ${token}` }
         }).then(response => {
             dispatch(setUser(response.data));
