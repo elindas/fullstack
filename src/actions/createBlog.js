@@ -1,20 +1,39 @@
 import axios from "axios";
+import jwt from "jsonwebtoken"
 
-export const postData = values => (dispatch, getState) => {
+export const CREATE_BLOG = "CREATE_BLOG";
+
+export const createBlog = data => {
+    return {
+        type: CREATE_BLOG,
+        payload:data
+    };
+};
+
+
+export const postDataBlog = values => (dispatch, getState) => {
     const { users } = getState();
 
     if (users.isLogin === true) {
         const token = localStorage.getItem("token");
 
+        let decoded=jwt.verify(token, 'SECRET', function(err, decoded) {
+            return decoded
+          });
+
+          console.log(decoded);
+          
+
         return axios({
             method: "POST",
-            url: "http://localhost:3009/todos",
-            data: values,
+            url: "http://localhost:3001/blog",
+            data: {...values,user:decoded.id},
             headers: { authorization: `Bearer ${token}` }
 
         }).then(response => {
-            console.log(response.data);
+            console.log("this is response Create Blog", response.data);
             
+            dispatch(createBlog(response.data.data))
         }).catch(error => {
             console.log(error);
         });

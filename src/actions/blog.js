@@ -2,10 +2,18 @@ import axios from "axios";
 import jwt from "jsonwebtoken"
 
 export const SET_BLOG = "SET_BLOG";
+export const DELETE_BLOG = "DELETE_BLOG";
 
 export const setBlog = data => {
     return {
         type: SET_BLOG,
+        payload: data
+    };
+};
+
+export const deleteBlogAction = data => {
+    return {
+        type: DELETE_BLOG,
         payload: data
     };
 };
@@ -21,10 +29,10 @@ export const fetchBlog = () => (dispatch, getState) => {
             // console.log("this is tokennnn", decoded)
             return decoded
           });
-
+            // console.log("THIS IS DECODED", decoded)
         return axios({
             method: "GET",
-            url: `http://localhost:3009/users/${decoded.email}`,
+            url: `http://localhost:3001/users/${decoded.email}`,
             headers: { authorization: `Bearer ${token}` }
         }).then(response => {
             dispatch(setBlog(response.data.data));
@@ -32,18 +40,20 @@ export const fetchBlog = () => (dispatch, getState) => {
             console.log(error);
         });
     }
+
 };
 
 export const deleteBlog = (id) => dispatch =>{
-    console.log('ID DI REDUX',id)
+    // console.log('ID DI REDUX',id)
     const token = localStorage.getItem("token");
     return axios({
         method: "DELETE",
-        url: `http://localhost:3009/todos/${id}`,
+        url: `http://localhost:3001/blog/${id}`,
         headers: { authorization: `Bearer ${token}` }
     }).then(response => {
-        console.log(response.data);
-        dispatch(setBlog(response.data.data));
+        console.log('DELETE RESPONSE', response.data);
+        dispatch(deleteBlogAction(response.data.data));
+        // fetchBlog()
     }).catch(error => {
         console.log(error);
     });

@@ -15,7 +15,7 @@ export const setTodo = (data) => {
 export const fetchTodos = () => dispatch => {
     return axios({
         method: "GET",
-        url: "http://localhost:3009/todos",
+        url: "http://localhost:3001/blog",
     }).then(response => {
         dispatch(setTodo(response.data.data));
     }).catch(error => {

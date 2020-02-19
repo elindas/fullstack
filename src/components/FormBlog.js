@@ -2,10 +2,11 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
+
 import { Formik } from "formik";
 import Button from "@material-ui/core/Button";
 
-import { postData } from "../actions";
+import { postDataBlog } from "../actions";
 import { connect } from "react-redux";
 
 function FormBlog(props) {
@@ -24,9 +25,9 @@ function FormBlog(props) {
                 Post a new blog
             </Typography>
             <Formik
-                initialValues={{ titleblog: "", paragraphs: "" }}
-                onSubmit={(values, actions) => {
-                    props.postData(values);
+                initialValues={{ title: "", message: "" }}
+                onSubmit={(values) => {
+                    props.postDataBlog(values);
                 }}
             >
                 {props => (
@@ -40,13 +41,13 @@ function FormBlog(props) {
                             <Grid item xs={6}>
                                 <TextField
                                     required
-                                    id="titleblog"
-                                    name="titleblog"
+                                    id="title"
+                                    name="title"
                                     label="Title"
                                     fullWidth
                                     onChange={props.handleChange}
                                     onBlur={props.handleBlur}
-                                    value={props.values.titleblog}
+                                    value={props.values.title}
                                 />
                             </Grid>
                             <Grid item xs={3}></Grid>
@@ -56,15 +57,15 @@ function FormBlog(props) {
                             <Grid item xs={6}>
                                 <TextField
                                     required
-                                    id="paragraphs"
-                                    name="paragraphs"
+                                    id="message"
+                                    name="message"
                                     label="Paragraphs"
                                     fullWidth
                                     multiline
                                     rows="5"
                                     onChange={props.handleChange}
                                     onBlur={props.handleBlur}
-                                    value={props.values.paragraphs}
+                                    value={props.values.message}
                                 />
                             </Grid>
                             <Grid item xs={3}></Grid>
@@ -98,8 +99,8 @@ function FormBlog(props) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        postData: values => {
-            dispatch(postData(values));
+        postDataBlog: values => {
+            dispatch(postDataBlog(values));
         }
     };
 };

@@ -1,4 +1,4 @@
-import { SET_BLOG, DELETE_BLOG } from "../actions";
+import { CREATE_BLOG } from "../actions";
 
 const initialState = {
     data: []
@@ -6,15 +6,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case SET_BLOG:
-            return {
-                data: action.payload
-            };
-        case DELETE_BLOG:
+        case CREATE_BLOG:
             return {
                 data: action.payload
             };
         default:
-            return state || [];
+            return state
     }
 };
