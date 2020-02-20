@@ -1,17 +1,16 @@
 import axios from "axios";
 import jwt from "jsonwebtoken"
 
-export const CREATE_BLOG = "CREATE_BLOG";
+export const UPDATE_BLOG = "UPDATE_BLOG";
 
-export const createBlog = data => {
+export const updBlog = data => {
     return {
-        type: CREATE_BLOG,
+        type: UPDATE_BLOG,
         payload:data
     };
 };
 
-
-export const postDataBlog = values => (dispatch, getState) => {
+export const updateBlog = (id, values) => (dispatch, getState) => {
     const { users } = getState();
 
     if (users.isLogin === true) {
@@ -21,19 +20,19 @@ export const postDataBlog = values => (dispatch, getState) => {
             return decoded
           });
 
-          console.log(decoded);
+          console.log("DECODED", decoded);
           
 
         return axios({
-            method: "POST",
-            url: "http://localhost:3002/blog",
+            method: "PUT",
+            url: `http://localhost:3002/blog/${id}`,
             data: {...values,user:decoded.id},
             headers: { authorization: `Bearer ${token}` }
-
-        }).then(response => {
-            console.log("this is response Create Blog", response.data);
             
-            dispatch(createBlog(response.data.data))
+        }).then(response => {
+            console.log("this is response action Update Blog", response.data.data);
+            
+            dispatch(updBlog(response.data.data))
         }).catch(error => {
             console.log(error);
         });

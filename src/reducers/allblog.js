@@ -1,7 +1,8 @@
-import { SET_TODOS } from "../actions";
+import { SET_TODOS, GET_BY_ID_BLOG } from "../actions";
 
 const initialState = {
-    data: []
+    data: [],
+    detailid: {}
 };
 
 export default (state = initialState, action) => {
@@ -10,7 +11,11 @@ export default (state = initialState, action) => {
             return {
                 data: action.payload
             };
+        case GET_BY_ID_BLOG:
+            return{
+                detailid: action.payload
+            }
         default:
-            return state || [];
+            return state;
     }
 };

@@ -68,7 +68,7 @@ class Blog extends Component {
                         justify="flex-end"
                         alignItems="flex-end"
                       >
-                        <Link to={`blog/${item._id}`}>
+                        <Link to={`/blog/edit/${item._id}`}>
                           <Button
                             spacing={3}
                             variant="outlined"

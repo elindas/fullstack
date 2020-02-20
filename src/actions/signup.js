@@ -12,7 +12,7 @@ export const setSignup = data => {
 export const signup = (values, history) => dispatch =>{
     return axios({
         method: "POST",
-        url: "http://localhost:3001/users",
+        url: "http://localhost:3002/users",
         data: values
     }).then(response => {
         console.log("this is response data signup", response.data);

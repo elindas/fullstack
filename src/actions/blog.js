@@ -32,7 +32,7 @@ export const fetchBlog = () => (dispatch, getState) => {
             // console.log("THIS IS DECODED", decoded)
         return axios({
             method: "GET",
-            url: `http://localhost:3001/users/${decoded.email}`,
+            url: `http://localhost:3002/users/${decoded.email}`,
             headers: { authorization: `Bearer ${token}` }
         }).then(response => {
             dispatch(setBlog(response.data.data));
@@ -48,7 +48,7 @@ export const deleteBlog = (id) => dispatch =>{
     const token = localStorage.getItem("token");
     return axios({
         method: "DELETE",
-        url: `http://localhost:3001/blog/${id}`,
+        url: `http://localhost:3002/blog/${id}`,
         headers: { authorization: `Bearer ${token}` }
     }).then(response => {
         console.log('DELETE RESPONSE', response.data);

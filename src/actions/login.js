@@ -32,7 +32,7 @@ export const login = (values, history) => dispatch => {
 
     return axios({
         method: "POST",
-        url: "http://localhost:3001/users/login",
+        url: "http://localhost:3002/users/login",
         data: values
     }).then(response => {
         if (response.status === 200) {
@@ -42,7 +42,7 @@ export const login = (values, history) => dispatch => {
             
             
             dispatch(isLogin());
-            history.push("/blog");
+            history.push("/userblog");
         }
     });
 };
