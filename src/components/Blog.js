@@ -14,7 +14,7 @@ const styles = theme => ({
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: "center",
+    textAlign: "justify",
     color: theme.palette.text.secondary
   }
 });
@@ -38,18 +38,18 @@ class Blog extends Component {
       <div className={classes.root}>
         <Grid container spacing={3}>
           <Grid container spacing={3}>
-            <Link to="createblog">
-              <Button
-                spacing={10}
-                variant="contained"
-                color="primary"
-                style={{
-                  margin: "30px 20px"
-                }}
-              >
-                Add Blog
-              </Button>
-            </Link>
+            <Button
+              component={Link}
+              to="createblog"
+              spacing={10}
+              variant="contained"
+              color="primary"
+              style={{
+                margin: "30px 30px"
+              }}
+            >
+              Add Blog
+            </Button>
           </Grid>
 
           {this.props.data !== undefined &&
@@ -58,8 +58,8 @@ class Blog extends Component {
                 <Fragment key={index}>
                   <Grid item xs={3}></Grid>
                   <Grid item xs={6}>
-                    <Paper className={classes.paper}>
-                      <h1>{item.title}</h1>
+                    <Paper className={classes.paper} elevation={5}>
+                      <h1 style={{ textAlign: "center" }}>{item.title}</h1>
                       <p>{item.message}</p>
 
                       <Grid
@@ -68,20 +68,23 @@ class Blog extends Component {
                         justify="flex-end"
                         alignItems="flex-end"
                       >
-                        <Link to={`/blog/edit/${item._id}`}>
-                          <Button
-                            spacing={3}
-                            variant="outlined"
-                            color="primary"
-                          >
-                            Update
-                          </Button>
-                        </Link>
+                        <Button
+                          component={Link}
+                          to={`/blog/edit/${item._id}`}
+                          style={{
+                            marginRight: "20px"
+                          }}
+                          
+                          variant="outlined"
+                          color="primary"
+                        >
+                          Update
+                        </Button>
 
                         <Button
-                          spacing={3}
+                          
                           variant="outlined"
-                          color="danger"
+                          color="secondary"
                           onClick={() => {
                             this.handleDelete(item._id);
                           }}

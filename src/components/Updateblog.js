@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -32,13 +32,13 @@ class Updateblog extends Component {
           EDIT BLOG
         </Typography>
         <Formik
-          initialValues={{ title: this.props.dataBlog.title, message: this.props.dataBlog.message }}
+          initialValues={{ title: this.props.dataBlog !== undefined && this.props.dataBlog.title, message: this.props.dataBlog !== undefined && this.props.dataBlog.message }}
           enableReinitialize={true}
           
-          onSubmit={(values)=> {
-            console.log("THIS IS VALUES", values)
+          onSubmit={(values, actions)=> {
+            // console.log("THIS IS VALUES", values)
             
-            this.props.updateBlog(this.props.match.params.id, values)
+            this.props.updateBlog(this.props.match.params.id, values, this.props.history)
           }}
         >
           {({
@@ -126,8 +126,8 @@ const mapDispatchToProps = dispatch => {
     showBlogById: id => {
       dispatch(showBlogById(id));
     },
-    updateBlog: (id, values) => {
-      dispatch(updateBlog(id, values));
+    updateBlog: (id, values, history) => {
+      dispatch(updateBlog(id, values, history));
     }
   };
 };

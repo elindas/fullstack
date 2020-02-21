@@ -11,7 +11,7 @@ export const createBlog = data => {
 };
 
 
-export const postDataBlog = values => (dispatch, getState) => {
+export const postDataBlog = (values, history) => (dispatch, getState) => {
     const { users } = getState();
 
     if (users.isLogin === true) {
@@ -34,8 +34,11 @@ export const postDataBlog = values => (dispatch, getState) => {
             console.log("this is response Create Blog", response.data);
             
             dispatch(createBlog(response.data.data))
+            history.push("/userblog")
         }).catch(error => {
             console.log(error);
         });
+
+        
     }
 };

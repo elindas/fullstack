@@ -14,19 +14,20 @@ import Allblog from "./components/Allblog";
 import FormBlog from "./components/FormBlog";
 import Updateblog from "./components/Updateblog";
 import Detailblog from "./components/Detailblog";
+import Navbar from "./components/Navbar";
 class App extends Component {
   render() {
     console.log("Props app", this.props);
     return (
       <Router>
+        <Navbar />
         <Switch>
           <Route exact path="/">
             <Allblog />
           </Route>
 
-          <Route path={'/blog/detail/:id'} component={Detailblog} />
+          <Route path={"/blog/detail/:id"} component={Detailblog} />
 
-           
           <Route exact path="/login">
             <SignIn />
           </Route>

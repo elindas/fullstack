@@ -10,7 +10,7 @@ export const updBlog = data => {
     };
 };
 
-export const updateBlog = (id, values) => (dispatch, getState) => {
+export const updateBlog = (id, values, history) => (dispatch, getState) => {
     const { users } = getState();
 
     if (users.isLogin === true) {
@@ -33,6 +33,9 @@ export const updateBlog = (id, values) => (dispatch, getState) => {
             console.log("this is response action Update Blog", response.data.data);
             
             dispatch(updBlog(response.data.data))
+
+            history.push("/userblog")
+
         }).catch(error => {
             console.log(error);
         });

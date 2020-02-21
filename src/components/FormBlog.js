@@ -8,6 +8,8 @@ import Button from "@material-ui/core/Button";
 
 import { postDataBlog } from "../actions";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+
 
 function FormBlog(props) {
     return (
@@ -27,7 +29,7 @@ function FormBlog(props) {
             <Formik
                 initialValues={{ title: "", message: "" }}
                 onSubmit={(values) => {
-                    props.postDataBlog(values);
+                    props.postDataBlog(values, props.history);
                 }}
             >
                 {props => (
@@ -99,10 +101,10 @@ function FormBlog(props) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        postDataBlog: values => {
-            dispatch(postDataBlog(values));
+        postDataBlog: (values, history) => {
+            dispatch(postDataBlog(values, history ));
         }
     };
 };
 
-export default connect(null, mapDispatchToProps)(FormBlog);
+export default withRouter(connect(null, mapDispatchToProps)(FormBlog));

@@ -31,15 +31,15 @@ class Allblog extends Component {
     return (
       <div className={classes.root}>
         <Grid container spacing={3}>
-          {Array.isArray(this.props.data) &&
+          {this.props.data !== undefined &&
             this.props.data.map((value, index) => {
               return (
                 <Fragment key={index}>
                   <Grid item xs={3}></Grid>
                   <Grid item xs={6}>
-                    <Paper className={classes.paper}>
+                    <Paper className={classes.paper} elevation={5}>
                       <h1>{value.title}</h1>
-                      {/* <p style={{textAlign:"left"}}>Author : {`${value.user.firstName} ${value.user.lastName}`}</p> */}
+                      <p style={{textAlign:"left"}}>Author : {value.user !== undefined && value.user.firstName}</p>
                       <p style={{ textAlign: "justify" }}>{value.message}</p>
 
                       <Grid
@@ -48,11 +48,11 @@ class Allblog extends Component {
                         justify="flex-end"
                         alignItems="flex-end"
                       >
-                        <Link to={`/blog/detail/${value._id}`}>
-                          <Button variant="outlined" color="primary">
+                        
+                          <Button component={Link} to={`/blog/detail/${value._id}`} variant="outlined" color="primary">
                             Read More
                           </Button>
-                        </Link>
+                       
                       </Grid>
                     </Paper>
                   </Grid>

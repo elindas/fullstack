@@ -30,15 +30,14 @@ export const fetchTodos = () => dispatch => {
     });
 };
 
-export const showBlogById = id => (dispatch, getState) => {
-  const { users } = getState();
+export const showBlogById = id => (dispatch) => {
+  
 
-  if (users.isLogin === true) {
-    const token = localStorage.getItem("token");
+ 
     return axios({
       method: "GET",
       url: `http://localhost:3002/blog/detail/${id}`,
-      headers: { authorization: `Bearer ${token}` }
+      
     })
       .then(res => {
         dispatch(getDetailBlog(res.data.data));
@@ -46,5 +45,5 @@ export const showBlogById = id => (dispatch, getState) => {
       .catch(err => {
         console.log(err);
       });
-  }
+  
 };
