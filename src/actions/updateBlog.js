@@ -2,6 +2,14 @@ import axios from "axios";
 import jwt from "jsonwebtoken"
 
 export const UPDATE_BLOG = "UPDATE_BLOG";
+export const SET_BLOG = "SET_BLOG";
+
+export const setBlog = data => {
+    return {
+        type: SET_BLOG,
+        payload: data
+    };
+};
 
 export const updBlog = data => {
     return {
@@ -10,7 +18,7 @@ export const updBlog = data => {
     };
 };
 
-export const updateBlog = (id, values, history) => (dispatch, getState) => {
+export const updateBlog = (id, values) => (dispatch, getState) => {
     const { users } = getState();
 
     if (users.isLogin === true) {
@@ -34,8 +42,7 @@ export const updateBlog = (id, values, history) => (dispatch, getState) => {
             
             dispatch(updBlog(response.data.data))
 
-            history.push("/userblog")
-
+            dispatch(setBlog(response.data.data));
         }).catch(error => {
             console.log(error);
         });

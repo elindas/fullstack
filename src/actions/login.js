@@ -26,6 +26,7 @@ export const isLogin = () => dispatch => {
 export const logout = () => dispatch => {
     
     const signOut = () => {
+      // eslint-disable-next-line
         const token = localStorage.removeItem("token");
     };
  

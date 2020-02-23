@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -8,6 +7,8 @@ import TextField from "@material-ui/core/TextField";
 import { Formik } from "formik";
 import Button from "@material-ui/core/Button";
 
+import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { updateBlog, showBlogById } from "../actions";
 
 class Updateblog extends Component {
@@ -32,13 +33,17 @@ class Updateblog extends Component {
           EDIT BLOG
         </Typography>
         <Formik
-          initialValues={{ title: this.props.dataBlog !== undefined && this.props.dataBlog.title, message: this.props.dataBlog !== undefined && this.props.dataBlog.message }}
+          initialValues={{
+            title:
+              this.props.dataBlog !== undefined && this.props.dataBlog.title,
+            message:
+              this.props.dataBlog !== undefined && this.props.dataBlog.message
+          }}
           enableReinitialize={true}
-          
-          onSubmit={(values, actions)=> {
+          onSubmit={(values, actions) => {
             // console.log("THIS IS VALUES", values)
-            
-            this.props.updateBlog(this.props.match.params.id, values, this.props.history)
+            this.props.updateBlog(this.props.match.params.id, values);
+            actions.resetForm();
           }}
         >
           {({
@@ -46,8 +51,8 @@ class Updateblog extends Component {
             handleChange,
             handleBlur,
             handleSubmit,
-            isSubmitting,
-          })=> (
+            isSubmitting
+          }) => (
             <form
               style={{ margin: "30px 20px" }}
               noValidate
@@ -64,7 +69,7 @@ class Updateblog extends Component {
                     fullWidth
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.title || ""}
+                    value={values.title || " "}
                   />
                 </Grid>
                 <Grid item xs={3}></Grid>
@@ -82,7 +87,7 @@ class Updateblog extends Component {
                     rows="5"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.message || ""}
+                    value={values.message || "  "}
                   />
                 </Grid>
                 <Grid item xs={3}></Grid>
@@ -106,6 +111,18 @@ class Updateblog extends Component {
                 >
                   Edit Blog
                 </Button>
+                <Button
+                  component={Link}
+                  to="/userblog"
+                  spacing={10}
+                  variant="contained"
+                  color="primary"
+                  style={{
+                    margin: "30px 20px"
+                  }}
+                >
+                  Back to Blog
+                </Button>
               </Grid>
             </form>
           )}
@@ -126,8 +143,8 @@ const mapDispatchToProps = dispatch => {
     showBlogById: id => {
       dispatch(showBlogById(id));
     },
-    updateBlog: (id, values, history) => {
-      dispatch(updateBlog(id, values, history));
+    updateBlog: (id, values) => {
+      dispatch(updateBlog(id, values));
     }
   };
 };

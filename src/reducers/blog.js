@@ -9,6 +9,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case SET_BLOG:
       return {
+        ...state,
         data: action.payload
       };
     case DELETE_BLOG:
